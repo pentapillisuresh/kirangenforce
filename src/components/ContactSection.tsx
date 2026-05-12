@@ -23,10 +23,31 @@ const ContactSection = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (_data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1000));
-    toast.success('Message sent! We\'ll be in touch within 24 hours.');
-    reset();
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch('https://formsubmit.co/Archaidplus@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          service: data.service,
+          message: data.message,
+          _captcha: 'false',
+          _template: 'table',
+          _subject: 'New Website Enquiry',
+        }),
+      });
+
+      if (response.ok) {
+        toast.success('✨ Message sent successfully! We\'ll get back to you within 24 hours.');
+        reset();
+      } else {
+        toast.error('❌ Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      toast.error('❌ Network error. Please check your connection.');
+    }
   };
 
   return (
@@ -42,27 +63,13 @@ const ContactSection = () => {
         {/* Animated Light Orbs */}
         <motion.div
           className="absolute top-1/3 -left-48 w-96 h-96 rounded-full bg-[#D9AF58]/5 blur-[120px]"
-          animate={{
-            y: [0, 50, 0],
-            x: [0, 30, 0]
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          animate={{ y: [0, 50, 0], x: [0, 30, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-1/3 -right-48 w-96 h-96 rounded-full bg-[#D9AF58]/5 blur-[120px]"
-          animate={{
-            y: [0, -50, 0],
-            x: [0, -30, 0]
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          animate={{ y: [0, -50, 0], x: [0, -30, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -94,7 +101,7 @@ const ContactSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          {/* Contact Info - Left Side */}
+          {/* Contact Info - Left Side (Real details) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -110,18 +117,18 @@ const ContactSection = () => {
                 <div className="flex-1">
                   <div className="text-[#D9AF58] text-[10px] font-mono tracking-wider uppercase mb-1">Main Office</div>
                   <div className="text-white text-sm leading-relaxed">
-                    Visakhapatnam, Andhra Pradesh<br />
+                   Calcutta, West Bengal<br />
                     India - 530016
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Contact Cards */}
+            {/* Contact Cards with real info */}
             {[
-              { icon: MapPin, label: 'Visit Us', value: '123 Design District\nNew York, NY 10001' },
-              { icon: Phone, label: 'Call Us', value: '+1 (212) 555-0100' },
-              { icon: Mail, label: 'Email Us', value: 'hello@archaidplus.studio' },
+              { icon: MapPin, label: 'Visit Us', value: 'Visakhapatnam, Andhra Pradesh\nIndia - 530016' },
+              { icon: Phone, label: 'Call Us', value: '+91 90736 51933' },
+              { icon: Mail, label: 'Email Us', value: 'Archaidplus@gmail.com' },
               { icon: Clock, label: 'Working Hours', value: 'Mon - Fri: 9:00 AM - 6:00 PM\nSat: 10:00 AM - 2:00 PM' },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="group flex items-start gap-4 p-5 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-[#D9AF58]/40 transition-all duration-300 hover:-translate-y-0.5">

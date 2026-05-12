@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './src/pages/Home';
 import About from './src/pages/About';
@@ -62,8 +64,8 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Increased loading time - 5 seconds
-    const minimumLoadTime = 3000; // 5 seconds
+    // Loading time - 3 seconds
+    const minimumLoadTime = 3000;
     
     const timer = setTimeout(() => {
       setLoading(false);
@@ -94,6 +96,26 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
           <FloatingWhatsApp />
+          
+          {/* Toast Container for notifications */}
+          <ToastContainer
+            position="bottom-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            toastStyle={{
+              backgroundColor: '#1a1a1a',
+              color: '#ffffff',
+              borderRadius: '12px',
+              border: '1px solid rgba(217, 175, 88, 0.3)',
+            }}
+          />
         </motion.div>
       )}
     </AnimatePresence>

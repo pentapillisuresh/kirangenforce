@@ -38,20 +38,20 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.05] mb-6"
+          className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.3] mb-6"
         >
-          Where Space
+          Architecturally aiding the
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[hsl(38,85%,55%)] to-[hsl(28,90%,65%)]">
-            Becomes Art
-          </span>
+          society with refreshed ideas 
+          <br />
+          and functional measures
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
         >
           We design extraordinary spaces that transcend the ordinary — blending architectural precision with interior artistry to create environments that inspire.
         </motion.p>
@@ -63,7 +63,7 @@ const HeroSection = () => {
         transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
       >
         <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center pt-2">
-          <div className="w-1 h-2 rounded-full bg-[hsl(38,85%,55%)]" />
+          <div className="w-1 h-2 rounded-full bg-white/60" />
         </div>
       </motion.div>
     </section>

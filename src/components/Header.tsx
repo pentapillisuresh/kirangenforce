@@ -58,7 +58,7 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[hsl(30,20%,8%)]/95 backdrop-blur-md border-b border-[#D9AF58]/10'
+          ? 'bg-white/95 backdrop-blur-md border-b border-black/10 shadow-md'
           : 'bg-transparent backdrop-blur-sm'
       }`}
     >
@@ -82,6 +82,8 @@ const Header = () => {
                     className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D9AF58]/50 ${
                       isActive(link.path)
                         ? 'text-[#D9AF58]'
+                        : scrolled
+                        ? 'text-gray-700 hover:text-[#D9AF58]'
                         : 'text-white/80 hover:text-[#D9AF58]'
                     }`}
                   >
@@ -98,9 +100,9 @@ const Header = () => {
                         exit={{ opacity: 0, y: 8, scale: 0.96 }}
                         transition={{ duration: 0.18 }}
                         className="absolute top-full left-0 mt-2 w-52 rounded-xl overflow-hidden shadow-2xl border border-[#D9AF58]/20"
-                        style={{ background: 'hsl(30,20%,10%)/98', backdropFilter: 'blur(20px)' }}
+                        style={{ background: 'white', backdropFilter: 'blur(20px)' }}
                       >
-                        <div className="p-2 bg-[hsl(30,20%,10%)]">
+                        <div className="p-2 bg-white">
                           {link.dropdown.map((item) => {
                             const Icon = item.icon;
                             return (
@@ -110,7 +112,7 @@ const Header = () => {
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all duration-200 group ${
                                   isActive(item.path)
                                     ? 'bg-[#D9AF58]/20 text-[#D9AF58]'
-                                    : 'text-white/70 hover:bg-[#D9AF58]/10 hover:text-[#D9AF58]'
+                                    : 'text-gray-700 hover:bg-[#D9AF58]/10 hover:text-[#D9AF58]'
                                 }`}
                               >
                                 <Icon className="w-4 h-4" />
@@ -130,6 +132,8 @@ const Header = () => {
                   className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D9AF58]/50 group ${
                     isActive(link.path)
                       ? 'text-[#D9AF58]'
+                      : scrolled
+                      ? 'text-gray-700 hover:text-[#D9AF58]'
                       : 'text-white/80 hover:text-[#D9AF58]'
                   }`}
                 >
@@ -147,7 +151,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-4">
             <Link
               to="/contact"
-              className="px-6 py-2.5 rounded-full text-sm font-semibold bg-[#D9AF58] text-[hsl(30,20%,8%)] hover:bg-[#C49A3E] hover:scale-105 transition-all duration-200 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#D9AF58]/50"
+              className="px-6 py-2.5 rounded-full text-sm font-semibold bg-[#D9AF58] text-white hover:bg-[#C49A3E] hover:scale-105 transition-all duration-200 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#D9AF58]/50"
             >
               Get Started
             </Link>
@@ -171,7 +175,7 @@ const Header = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-0 top-20 z-40 bg-[hsl(30,20%,6%)]/98 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 top-20 z-40 bg-white/98 backdrop-blur-xl lg:hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
@@ -182,7 +186,7 @@ const Header = () => {
                   <div key={link.label}>
                     <button
                       onClick={() => setDropdownOpen(!dropdownOpen)}
-                      className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-white/80 hover:text-[#D9AF58] hover:bg-[#D9AF58]/10 transition-all duration-200 text-base font-medium"
+                      className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-gray-700 hover:text-[#D9AF58] hover:bg-[#D9AF58]/10 transition-all duration-200 text-base font-medium"
                     >
                       {link.label}
                       <ChevronDown className={`w-4 h-4 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
@@ -201,7 +205,7 @@ const Header = () => {
                               <Link
                                 key={item.path}
                                 to={item.path}
-                                className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:text-[#D9AF58] hover:bg-[#D9AF58]/10 transition-all duration-200 text-sm"
+                                className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:text-[#D9AF58] hover:bg-[#D9AF58]/10 transition-all duration-200 text-sm"
                               >
                                 <Icon className="w-4 h-4" />
                                 {item.label}
@@ -219,7 +223,7 @@ const Header = () => {
                     className={`px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
                       isActive(link.path)
                         ? 'text-[#D9AF58] bg-[#D9AF58]/10'
-                        : 'text-white/80 hover:text-[#D9AF58] hover:bg-[#D9AF58]/10'
+                        : 'text-gray-700 hover:text-[#D9AF58] hover:bg-[#D9AF58]/10'
                     }`}
                   >
                     {link.label}
@@ -228,7 +232,7 @@ const Header = () => {
               )}
               <Link
                 to="/contact"
-                className="mt-4 px-6 py-3 rounded-full text-center font-semibold bg-[#D9AF58] text-[hsl(30,20%,8%)] hover:bg-[#C49A3E] hover:scale-105 transition-all duration-200"
+                className="mt-4 px-6 py-3 rounded-full text-center font-semibold bg-[#D9AF58] text-white hover:bg-[#C49A3E] hover:scale-105 transition-all duration-200"
               >
                 Get Started
               </Link>

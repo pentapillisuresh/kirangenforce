@@ -7,7 +7,6 @@ import {
   Sofa, 
   Ruler, 
   Layers, 
-  Camera, 
   MessageSquare,
   ArrowRight
 } from 'lucide-react';
@@ -44,38 +43,20 @@ const services: Service[] = [
   {
     id: 3,
     icon: Ruler,
-    title: 'Planning',
-    subtitle: 'Precision Layouts',
-    description: 'Optimizing spatial dynamics to enhance flow, functionality, and human experience.',
+    title: 'Renovation',
+    subtitle: 'Adaptive Reuse',
+    description: 'Transforming existing spaces into contemporary masterpieces while preserving soul.',
     color: '#D9AF58',
     number: '03'
   },
   {
     id: 4,
-    icon: Layers,
-    title: 'Renovation',
-    subtitle: 'Adaptive Reuse',
-    description: 'Transforming existing spaces into contemporary masterpieces while preserving soul.',
-    color: '#D9AF58',
-    number: '04'
-  },
-  {
-    id: 5,
-    icon: Camera,
-    title: 'Visualization',
-    subtitle: 'Digital Reality',
-    description: 'Bringing concepts to life through photorealistic renders and virtual experiences.',
-    color: '#D9AF58',
-    number: '05'
-  },
-  {
-    id: 6,
     icon: MessageSquare,
     title: 'Consulting',
     subtitle: 'Expert Guidance',
     description: 'Strategic advisory services from concept through completion for discerning clients.',
     color: '#D9AF58',
-    number: '06'
+    number: '04'
   }
 ];
 
@@ -136,12 +117,12 @@ const ServicesSection: FC = () => {
           </p>
         </motion.div>
 
-        {/* Circle Cards Grid */}
+        {/* Circle Cards Grid - Updated to 4 columns */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center max-w-4xl mx-auto"
         >
           {services.map((service) => {
             const Icon = service.icon;

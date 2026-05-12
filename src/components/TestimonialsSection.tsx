@@ -90,7 +90,7 @@ const TestimonialsSection = () => {
             <div className="w-8 h-px bg-[#D9AF58]" />
           </div>
           
-          <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+          <h2 className="font-serif text-5xl md:text-6xl lg:text-5xl font-bold text-white leading-tight mb-6">
             What Our
             <br />
             <span className="text-[#D9AF58]">Clients Say</span>

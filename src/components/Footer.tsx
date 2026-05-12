@@ -17,12 +17,12 @@ const Footer = () => (
         {/* Brand Section */}
         <div className="lg:col-span-1">
           <Link to="/" className="flex items-center gap-3 mb-4 group">
-            <div className="w-10 h-10 rounded-lg bg-[#D9AF58] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
-              <Building2 className="w-5 h-5 text-black" />
+            <div className="w-10 h-10">
+             <img src='./images/logo2.png'/>
             </div>
             <div>
-              <span className="font-serif text-xl font-bold text-white">archaidplus</span>
-              <span className="block text-[10px] text-[#D9AF58] tracking-[0.2em] uppercase font-mono">Studio</span>
+              <span className="font-serif text-xl font-bold text-white uppercase">archaidplus</span>
+              {/* <span className="block text-[10px] text-[#D9AF58] tracking-[0.2em] uppercase font-mono">Studio</span> */}
             </div>
           </Link>
           <p className="text-white/50 text-sm leading-relaxed mb-6 font-sans">
@@ -90,24 +90,24 @@ const Footer = () => (
               <MapPin className="w-4 h-4 text-[#D9AF58] mt-0.5 shrink-0" />
               <div>
                 <span className="text-white/60 text-xs font-mono block mb-0.5">Main Office</span>
-                <span className="text-white/50 text-sm">Visakhapatnam, Andhra Pradesh<br />India - 530016</span>
+                <span className="text-white/50 text-sm">Calcutta, West Bengal<br />India - 530016</span>
               </div>
             </li>
             {/* NY Office Address */}
             <li className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-[#D9AF58] mt-0.5 shrink-0" />
               <div>
-                <span className="text-white/60 text-xs font-mono block mb-0.5">NY Office</span>
-                <span className="text-white/50 text-sm">123 Design District, New York, NY 10001</span>
+                <span className="text-white/60 text-xs font-mono block mb-0.5">Sub office</span>
+                <span className="text-white/50 text-sm">vizag, Andhra Pradesh</span>
               </div>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="w-4 h-4 text-[#D9AF58] shrink-0" />
-              <a href="tel:+12125550100" className="text-white/50 text-sm hover:text-[#D9AF58] transition-colors font-sans">+1 (212) 555-0100</a>
+              <a href="tel:+12125550100" className="text-white/50 text-sm hover:text-[#D9AF58] transition-colors font-sans">+91 90736 51933</a>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="w-4 h-4 text-[#D9AF58] shrink-0" />
-              <a href="mailto:hello@archaidplus.studio" className="text-white/50 text-sm hover:text-[#D9AF58] transition-colors font-sans">hello@archaidplus.studio</a>
+              <a href="mailto:hello@archaidplus.studio" className="text-white/50 text-sm hover:text-[#D9AF58] transition-colors font-sans">Archaidplus@gmail.com</a>
             </li>
             <li className="flex items-start gap-3">
               <Clock className="w-4 h-4 text-[#D9AF58] mt-0.5 shrink-0" />

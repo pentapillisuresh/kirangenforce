@@ -22,14 +22,16 @@ export default function Home() {
         <AboutSection />
         <ServicesSection />
         <FeaturedProjects />
-        <InteriorShowcase />
-        <WhyChooseUs />
+        {/* <InteriorShowcase /> */}
         <ProcessTimeline />
+
+        <WhyChooseUs />
+         <ContactSection />
         {/* <AchievementsCounter /> */}
         <TestimonialsSection />
-        <BlogSection />
-        <CTABanner />
-        <ContactSection />
+        {/* <BlogSection /> */}
+        {/* <CTABanner /> */}
+       
       </main>
       <Footer />
     </>

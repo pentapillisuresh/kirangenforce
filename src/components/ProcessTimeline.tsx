@@ -1,42 +1,16 @@
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Search, PenTool, Layers, Hammer, CheckCircle } from 'lucide-react';
 
 const steps = [
-  { 
-    icon: Search, 
-    step: '01', 
-    title: 'Discovery', 
-    desc: 'We begin with an in-depth consultation to understand your vision, lifestyle, and aspirations for the space.' 
-  },
-  { 
-    icon: PenTool, 
-    step: '02', 
-    title: 'Concept Design', 
-    desc: 'Our designers develop initial concepts, mood boards, and spatial layouts for your review and feedback.' 
-  },
-  { 
-    icon: Layers, 
-    step: '03', 
-    title: 'Design Development', 
-    desc: 'Approved concepts are refined into detailed drawings, material selections, and 3D visualizations.' 
-  },
-  { 
-    icon: Hammer, 
-    step: '04', 
-    title: 'Construction', 
-    desc: 'Our trusted network of contractors brings the design to life with precision craftsmanship and oversight.' 
-  },
-  { 
-    icon: CheckCircle, 
-    step: '05', 
-    title: 'Handover', 
-    desc: 'Final walkthrough, styling, and handover — your dream space, delivered to perfection.' 
-  },
+  { icon: Search, step: '01', title: 'Discovery', desc: 'In-depth consultation to understand your vision.' },
+  { icon: PenTool, step: '02', title: 'Concept', desc: 'Initial concepts and mood boards for layouts.' },
+  { icon: Layers, step: '03', title: 'Development', desc: 'Refined drawings and 3D visualizations.' },
+  { icon: Hammer, step: '04', title: 'Build', desc: 'Precision craftsmanship by our expert team.' },
+  { icon: CheckCircle, step: '05', title: 'Handover', desc: 'Final walkthrough and styling of the space.' },
 ];
 
-// Typewriter effect hook
-const useTypewriter = (text: string, speed: number = 30, delay: number = 0) => {
+const useTypewriter = (text: string, speed: number = 20, delay: number = 0) => {
   const [displayText, setDisplayText] = useState('');
   const [started, setStarted] = useState(false);
 
@@ -47,7 +21,6 @@ const useTypewriter = (text: string, speed: number = 30, delay: number = 0) => {
 
   useEffect(() => {
     if (!started) return;
-    
     let i = 0;
     const typingInterval = setInterval(() => {
       if (i < text.length) {
@@ -57,193 +30,137 @@ const useTypewriter = (text: string, speed: number = 30, delay: number = 0) => {
         clearInterval(typingInterval);
       }
     }, speed);
-
     return () => clearInterval(typingInterval);
   }, [text, speed, started]);
 
   return displayText;
 };
 
-const ProcessTimeline = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.2 });
+const AlternatingTimeline = () => {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
   const [activeStep, setActiveStep] = useState(-1);
 
   useEffect(() => {
-    if (inView) {
-      // Animate steps one by one
+    if (isInView) {
       steps.forEach((_, index) => {
         setTimeout(() => {
           setActiveStep(prev => Math.max(prev, index));
         }, index * 800);
       });
     }
-  }, [inView]);
+  }, [isInView]);
 
   return (
-    <section ref={ref} className="relative py-24 bg-black overflow-hidden">
-      {/* Premium Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D9AF58' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: '60px 60px'
-        }} />
+    <section ref={containerRef} className="py-40 bg-black overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
         
-        {/* Animated Light Orbs */}
-        <motion.div
-          className="absolute top-1/4 -left-48 w-96 h-96 rounded-full bg-[#D9AF58]/5 blur-[120px]"
-          animate={{
-            y: [0, 50, 0],
-            x: [0, 30, 0]
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -right-48 w-96 h-96 rounded-full bg-[#D9AF58]/3 blur-[120px]"
-          animate={{
-            y: [0, -50, 0],
-            x: [0, -30, 0]
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
-
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Header */}
+        {/* Title and Subtitle Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
           className="text-center mb-20"
         >
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-8 h-px bg-[#D9AF58]" />
-            <span className="text-[#D9AF58] text-xs font-mono tracking-[0.2em] uppercase">How We Work</span>
+            <span className="text-[#D9AF58] text-xs font-mono tracking-[0.2em] uppercase">
+              Our Process
+            </span>
             <div className="w-8 h-px bg-[#D9AF58]" />
           </div>
           
           <h2 className="font-serif text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
-            Our <span className="text-[#D9AF58]">Process</span>
+            How We Work
           </h2>
           
           <div className="w-20 h-px bg-[#D9AF58] mx-auto mb-6" />
           
           <p className="text-white/50 max-w-xl mx-auto font-sans">
-            A transparent, collaborative journey from first conversation to final reveal.
+            A seamless journey from concept to completion, ensuring excellence at every step.
           </p>
         </motion.div>
-
-        {/* Timeline with Animated Line */}
-        <div className="relative">
-          {/* Animated Vertical Line */}
-          <motion.div 
-            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-[#D9AF58]/30 md:-translate-x-px overflow-hidden"
-            initial={{ scaleY: 0 }}
-            animate={inView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            style={{ originY: 0 }}
-          />
+        
+        <div className="relative min-h-[400px] flex flex-col justify-center">
           
-          {/* Glow on the line */}
-          <motion.div 
-            className="absolute left-8 md:left-1/2 top-0 w-px h-full bg-gradient-to-b from-[#D9AF58] via-[#D9AF58]/50 to-transparent md:-translate-x-px"
-            initial={{ scaleY: 0 }}
-            animate={inView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
-            style={{ originY: 0 }}
-          />
+          {/* Central Horizontal Line */}
+          <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -translate-y-1/2 hidden md:block">
+            <motion.div 
+              className="absolute top-0 left-0 h-full bg-[#D9AF58] origin-left"
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 3, ease: "linear" }}
+              style={{ width: '100%' }}
+            />
+          </div>
 
-          <div className="space-y-16">
-            {steps.map((step, i) => {
-              const Icon = step.icon;
-              const isEven = i % 2 === 0;
-              const isActive = activeStep >= i;
-              const typewriterText = useTypewriter(step.desc, 20, i * 800);
+          {/* Steps Wrapper */}
+          <div className="grid grid-cols-1 md:grid-cols-5 relative z-10">
+            {steps.map((item, idx) => {
+              const isActive = activeStep >= idx;
+              const isAbove = idx % 2 === 0;
+              const typewriterDesc = useTypewriter(item.desc, 20, idx * 800);
 
               return (
-                <motion.div
-                  key={step.step}
-                  initial={{ opacity: 0, x: isEven ? -40 : 40 }}
-                  animate={isActive ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className={`relative flex items-start gap-8 md:gap-0 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-                >
-                  {/* Timeline Dot with Animation */}
+                <div key={item.step} className="relative flex flex-col items-center">
+                  
+                  {/* Content Box - Alternating Position */}
                   <motion.div 
-                    className="absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-[#D9AF58] border-4 border-black -translate-x-1/2 mt-6 z-10 shadow-lg shadow-[#D9AF58]/30"
-                    initial={{ scale: 0 }}
-                    animate={isActive ? { scale: 1 } : {}}
-                    transition={{ duration: 0.4, delay: i * 0.15, type: "spring", stiffness: 200 }}
+                    initial={{ opacity: 0, y: isAbove ? -20 : 20 }}
+                    animate={isActive ? { opacity: 1, y: 0 } : {}}
+                    className={`absolute w-full px-4 text-center hidden md:block ${
+                      isAbove ? 'bottom-[calc(50%+30px)]' : 'top-[calc(50%+30px)]'
+                    }`}
                   >
-                    <motion.div 
-                      className="absolute inset-0 rounded-full bg-[#D9AF58]"
-                      animate={isActive ? { scale: [1, 1.5, 1] } : {}}
-                      transition={{ duration: 1, delay: i * 0.15 + 0.3, repeat: Infinity }}
-                    />
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="p-2 rounded-full bg-[#D9AF58]/10 mb-2">
+                        <item.icon className="w-5 h-5 text-[#D9AF58]" />
+                      </div>
+                      <h3 className="text-white font-serif text-lg font-bold">{item.title}</h3>
+                      <p className="text-white/40 text-xs leading-relaxed max-w-[160px]">
+                        {isActive ? typewriterDesc : ""}
+                        {isActive && typewriterDesc.length < item.desc.length && (
+                          <span className="inline-block w-1 h-3 ml-1 bg-[#D9AF58] animate-pulse" />
+                        )}
+                      </p>
+                    </div>
                   </motion.div>
 
-                  {/* Content */}
-                  <div className={`pl-20 md:pl-0 md:w-1/2 transition-all duration-500 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
+                  {/* The Center Dot */}
+                  <div className="relative flex items-center justify-center h-full">
                     <motion.div 
-                      className={`inline-flex items-center gap-3 mb-4 ${isEven ? 'md:flex-row-reverse' : ''}`}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={isActive ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: i * 0.15 + 0.2 }}
+                      initial={{ scale: 0 }}
+                      animate={isActive ? { scale: 1 } : {}}
+                      className="w-4 h-4 rounded-full bg-black border-2 border-[#D9AF58] z-20"
                     >
-                      {/* Icon Container */}
-                      <motion.div 
-                        className="w-12 h-12 rounded-xl border border-[#D9AF58]/30 bg-[#D9AF58]/10 flex items-center justify-center"
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <Icon className="w-5 h-5 text-[#D9AF58]" />
-                      </motion.div>
-                      
-                      {/* Step Number */}
-                      <motion.span 
-                        className="font-serif text-5xl font-bold text-white/10"
-                        initial={{ opacity: 0 }}
-                        animate={isActive ? { opacity: 1 } : {}}
-                        transition={{ duration: 0.5, delay: i * 0.15 + 0.1 }}
-                      >
-                        {step.step}
-                      </motion.span>
-                    </motion.div>
-
-                    <motion.h3 
-                      className="font-serif text-2xl font-bold text-white mb-3"
-                      initial={{ opacity: 0 }}
-                      animate={isActive ? { opacity: 1 } : {}}
-                      transition={{ duration: 0.5, delay: i * 0.15 + 0.3 }}
-                    >
-                      {step.title}
-                    </motion.h3>
-
-                    {/* Typewriter Effect Description */}
-                    <motion.p 
-                      className="text-white/50 text-sm leading-relaxed font-sans"
-                      initial={{ opacity: 0 }}
-                      animate={isActive ? { opacity: 1 } : {}}
-                      transition={{ duration: 0.3, delay: i * 0.15 + 0.4 }}
-                    >
-                      {isActive ? typewriterText : ''}
-                      {isActive && typewriterText.length < step.desc.length && (
-                        <span className="inline-block w-0.5 h-3 bg-[#D9AF58] ml-1 animate-pulse" />
+                      {isActive && (
+                        <motion.div 
+                          className="absolute inset-0 rounded-full bg-[#D9AF58]"
+                          animate={{ scale: [1, 2.5], opacity: [0.3, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
                       )}
-                    </motion.p>
+                    </motion.div>
+                    
+                    {/* Mobile Only Content (Standard List) */}
+                    <div className="md:hidden ml-10 w-full py-8">
+                       <h3 className="text-white font-bold">{item.title}</h3>
+                       <p className="text-white/40 text-sm">{item.desc}</p>
+                    </div>
                   </div>
 
-                  <div className="hidden md:block md:w-1/2" />
-                </motion.div>
+                  {/* Step Number Badge */}
+                  <motion.span 
+                    initial={{ opacity: 0 }}
+                    animate={isActive ? { opacity: 1 } : {}}
+                    className={`absolute font-mono text-[10px] text-[#D9AF58] tracking-widest hidden md:block ${
+                      isAbove ? 'top-[calc(50%+15px)]' : 'bottom-[calc(50%+15px)]'
+                    }`}
+                  >
+                    STEP {item.step}
+                  </motion.span>
+
+                </div>
               );
             })}
           </div>
@@ -253,4 +170,4 @@ const ProcessTimeline = () => {
   );
 };
 
-export default ProcessTimeline;
+export default AlternatingTimeline;

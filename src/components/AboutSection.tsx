@@ -24,7 +24,7 @@ const AboutSection = () => {
               <span className="text-[#D9AF58]">Honoring the Past</span>
             </h2>
             <p className="text-white/60 leading-relaxed mb-6 text-justify">
-              Founded in 2012, archaidplus Studio has grown from a boutique design practice into an internationally recognized architecture and interior design firm. We believe that great design is not just about aesthetics — it's about creating spaces that enhance human experience.
+              Founded in 2019, archaidplus architecture has grown from a boutique design practice into an internationally recognized architecture and interior design firm. We believe that great design is not just about aesthetics — it's about creating spaces that enhance human experience.
             </p>
             <p className="text-white/60 leading-relaxed mb-10 text-justify">
               Our multidisciplinary team of architects, interior designers, and spatial thinkers collaborate to deliver projects that are both visually stunning and functionally exceptional.
