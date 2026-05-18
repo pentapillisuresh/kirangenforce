@@ -117,8 +117,8 @@ const ContactSection = () => {
                 <div className="flex-1">
                   <div className="text-[#D9AF58] text-[10px] font-mono tracking-wider uppercase mb-1">Main Office</div>
                   <div className="text-white text-sm leading-relaxed">
-                   Calcutta, West Bengal<br />
-                    India - 530016
+                   Kolkata 700019, West Bengal<br />
+                    
                   </div>
                 </div>
               </div>

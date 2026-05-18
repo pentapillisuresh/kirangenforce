@@ -66,7 +66,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-12 h-12">
-              <img src='./images/logo1.png' alt="Logo" />
+              <img src='/images/logo1.png' alt="Logo" />
             </div>
           </Link>
 

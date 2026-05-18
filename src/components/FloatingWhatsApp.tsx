@@ -20,7 +20,7 @@ const FloatingWhatsApp = () => {
       whileTap={{ scale: 0.95 }}
     >
       <img 
-        src="./images/whatsapp.png" 
+        src="/images/whatsapp.png" 
         alt="WhatsApp" 
         className="w-full h-full object-cover"
       />
