@@ -33,7 +33,7 @@ const Preloader = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         >
           <img
-            src="/images/AA.gif"
+            src="./images/aa1.gif"
             alt="Loading..."
             className="w-32 h-32 md:w-48 md:h-48 object-contain mx-auto"
           />
