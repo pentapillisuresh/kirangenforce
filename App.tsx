@@ -18,7 +18,7 @@ import NotFound from './src/pages/NotFound';
 import FloatingWhatsApp from './src/components/FloatingWhatsApp';
 import FloatingCallButton from './src/components/FloatingCallButton';
 import ScrollToTop from './src/components/ScrollToTop';
-import LoadingScreen from "./src/components/LandingScreen"; // Updated import path
+import LoadingScreen from "./src/components/LandingScreen"; 
 
 export default function App() {
   const [loading, setLoading] = useState(true);
