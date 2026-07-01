@@ -1,145 +1,222 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  ShieldCheck,
-  Lightbulb,
-  Clock3,
-  Gem,
-  Leaf,
-  Users,
-  ArrowUpRight,
-} from "lucide-react";
+import { Play, Pause } from "lucide-react";
 
 const features = [
   {
-    icon: Lightbulb,
-    title: "Innovative Concepts",
-    desc: "Creative and modern architectural solutions.",
-    number: "01",
+    id: 1,
+    title: "Low noise level",
+    image: "./images/icon1.webp",
   },
   {
-    icon: ShieldCheck,
-    title: "Trusted Quality",
-    desc: "Premium execution with refined detailing.",
-    number: "02",
+    id: 2,
+    title: "Fuel efficient",
+    image: "./images/icon2.webp",
   },
   {
-    icon: Clock3,
-    title: "Timely Delivery",
-    desc: "Efficient project completion with precision.",
-    number: "03",
+    id: 3,
+    title: "Better power to weight ratio",
+    image: "./images/icon3.webp",
   },
   {
-    icon: Gem,
-    title: "Luxury Finishes",
-    desc: "Elegant materials and timeless interiors.",
-    number: "04",
+    id: 4,
+    title: "Easy maintenance",
+    image: "./images/icon4.webp",
   },
   {
-    icon: Leaf,
-    title: "Sustainable Design",
-    desc: "Eco-conscious architecture for modern living.",
-    number: "05",
+    id: 5,
+    title: "More than 200 service points for immediate service",
+    image: "./images/icon5.webp",
   },
   {
-    icon: Users,
-    title: "Client Focused",
-    desc: "Collaborative approach from concept to completion.",
-    number: "06",
+    id: 6,
+    title: "Compact size",
+    image: "./images/icon6.webp",
+  },
+  {
+    id: 7,
+    title: "Robust design for durability",
+    image: "./images/icon7.webp",
+  },
+  {
+    id: 8,
+    title: "Robust design for durability",
+    image: "./images/icon8.webp",
   },
 ];
 
 const WhyChooseUs = () => {
   const ref = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const inView = useInView(ref, {
     once: true,
     margin: "-100px",
   });
 
+  // Auto-play video when component mounts
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Auto-play prevented:", error);
+        setIsPlaying(false);
+      });
+    }
+  }, []);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
     <section
       ref={ref}
-      className="relative py-24 bg-black overflow-hidden"
+      className="relative py-24 bg-black overflow-hidden mt-20"
     >
-  
-      
-
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         
-        {/* HEADER - Updated Font Styles */}
+        {/* HEADER - Single Title Only */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <span className="text-[#D9AF58] uppercase tracking-[0.35em] text-xs font-mono font-semibold block mb-5">
-            Why Choose Us
-          </span>
-
-          <h2 className="font-serif text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
-            Excellence In
-            <br />
-            <span className="text-[#D9AF58]">Every Detail</span>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight">
+            Features of Mahindra Powerol Genset
           </h2>
-
-          <p className="max-w-2xl mx-auto text-white/50 text-base leading-relaxed font-sans">
-            Timeless architecture and premium interiors crafted
-            with innovation, precision, and luxury aesthetics.
-          </p>
         </motion.div>
 
-        {/* SMALLER CARDS - Updated Font Styles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((item, index) => {
-            const Icon = item.icon;
+        {/* Two Column Layout - Left: Features, Right: Video */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 relative">
+          
+          {/* LEFT - Features Grid with Row and Column Lines */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="pr-0 lg:pr-12"
+          >
+            <div className="grid grid-cols-2 border border-white/10">
+              {features.map((item, index) => {
+                const isLastInRow = (index + 1) % 2 === 0;
+                const isLastRow = index >= features.length - 2;
+                
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{
+                      duration: 0.4,
+                      delay: index * 0.05,
+                    }}
+                    className={`
+                      group relative p-4 flex flex-col items-center text-center gap-3
+                      ${!isLastInRow ? 'border-r border-white/10' : ''}
+                      ${!isLastRow ? 'border-b border-white/10' : ''}
+                      hover:bg-[#EB0133]/5 transition-all duration-500 cursor-pointer
+                      overflow-hidden
+                    `}
+                  >
+                    {/* Left to Right Hover Animation - Single Color #EB0133 */}
+                    <div className="absolute inset-0 w-full h-full bg-[#EB0133] -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out opacity-10" />
+                    
+                    {/* Content */}
+                    <div className="relative z-10 flex flex-col items-center text-center gap-2">
+                      {/* Image */}
+                      <div className="w-16 h-16 flex-shrink-0">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
 
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                }}
-                className="group"
-              >
-                <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-[26px] p-7 hover:border-[#D9AF58]/40 transition-all duration-500 hover:-translate-y-2">
-                  
-                  {/* Number */}
-                  <div className="absolute top-5 right-5 text-5xl font-serif font-bold text-white/[0.04] group-hover:text-[#D9AF58]/10 transition-all duration-500">
-                    {item.number}
-                  </div>
-
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center mb-6 group-hover:bg-[#D9AF58] transition-all duration-500">
-                    <Icon className="w-6 h-6 text-[#D9AF58] group-hover:text-black transition-all duration-500" />
-                  </div>
-
-                  {/* Content */}
-                  <h3 className="font-serif text-2xl font-bold text-white mb-4">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-white/45 leading-relaxed text-sm mb-8 font-sans">
-                    {item.desc}
-                  </p>
-
-                  {/* Bottom */}
-                  <div className="flex items-center justify-between">
-                    <div className="w-10 h-[1px] bg-[#D9AF58]" />
-
-                    <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#D9AF58] group-hover:border-[#D9AF58] transition-all duration-500">
-                      <ArrowUpRight className="w-4 h-4 text-white group-hover:text-black transition-all duration-500" />
+                      {/* Title */}
+                      <h3 className="font-sans text-xs font-medium text-white/80 group-hover:text-[#EB0133] transition-colors duration-500 leading-tight">
+                        {item.title}
+                      </h3>
                     </div>
-                  </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* RIGHT - Video with Reduced Height */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="pl-0 lg:pl-12 mt-10 lg:mt-0"
+          >
+            <div className="relative rounded-2xl overflow-hidden bg-black/40 border border-white/10 aspect-[3/2] group">
+              {/* Video Element - Auto Play */}
+              <video
+                ref={videoRef}
+                className="w-full h-full object-cover"
+                poster="/images/video-thumb.jpg"
+                playsInline
+                muted
+                loop
+                autoPlay
+              >
+                <source src="./images/ai.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+
+              {/* Play/Pause Button */}
+              <button
+                onClick={togglePlay}
+                className="absolute inset-0 flex items-center justify-center cursor-pointer group/btn"
+                aria-label={isPlaying ? "Pause video" : "Play video"}
+              >
+                <div className="w-16 h-16 rounded-full bg-[#EB0133]/90 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-[#EB0133] shadow-2xl">
+                  {isPlaying ? (
+                    <Pause className="w-6 h-6 text-white" />
+                  ) : (
+                    <Play className="w-6 h-6 text-white ml-1" />
+                  )}
                 </div>
-              </motion.div>
-            );
-          })}
+              </button>
+
+              {/* Bottom Text Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                <p className="text-white/80 text-xs font-medium tracking-wide">
+                  Mahindra Powerol — Powering Progress
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
+
+        {/* BUSINESS ENQUIRY Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-20 text-center"
+        >
+          <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+            BUSINESS ENQUIRY
+          </h3>
+          <p className="text-white/50 text-base max-w-2xl mx-auto">
+            We're happy to answer any questions you have about Mahindra Powerol. Please complete the form and we'll be in touch with you.
+          </p>
+        </motion.div>
 
       </div>
     </section>

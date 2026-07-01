@@ -1,250 +1,177 @@
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import {
-  ArrowRight,
-  Clock,
-  User,
-  Calendar,
-  ChevronRight,
-} from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { Clock, User, ArrowRight, Instagram, Search } from 'lucide-react';
+import blogData from '../data/blogData.json';
 
-const posts = [
-  {
-    title: 'The Art of Biophilic Design: Bringing Nature Indoors',
-    excerpt:
-      'Discover how integrating natural elements into interior spaces can transform wellbeing and productivity.',
-    image:
-      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&h=400&fit=crop',
-    category: 'Interior Design',
-    author: 'Elena Vasquez',
-    readTime: '5 min read',
-    date: 'Jan 15, 2026',
-  },
-  {
-    title: 'Minimalism vs. Maximalism: Finding Your Design Language',
-    excerpt:
-      'A deep dive into two opposing design philosophies and how to find the perfect balance for your space.',
-    image:
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop',
-    category: 'Design Theory',
-    author: 'James Okafor',
-    readTime: '7 min read',
-    date: 'Jan 8, 2026',
-  },
-  {
-    title: 'Sustainable Architecture: Building for the Future',
-    excerpt:
-      'How modern architects are integrating sustainability without compromising on beauty or functionality.',
-    image:
-      'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&h=400&fit=crop',
-    category: 'Architecture',
-    author: 'Priya Sharma',
-    readTime: '6 min read',
-    date: 'Dec 28, 2025',
-  },
-];
+export default function Blog() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredPosts, setFilteredPosts] = useState(blogData.posts);
+  const [visiblePosts, setVisiblePosts] = useState(6);
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-};
+  useEffect(() => {
+    const filtered = blogData.posts.filter(post =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.author.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredPosts(filtered);
+    setVisiblePosts(6);
+  }, [searchTerm]);
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      // ease: 'easeOut',
-    },
-  },
-};
-
-const BlogSection = () => {
-  const ref = useRef<HTMLElement | null>(null);
-
-  const inView = useInView(ref, {
-    once: true,
-    amount: 0.2,
-  });
+  const loadMore = () => {
+    setVisiblePosts(prev => prev + 3);
+  };
 
   return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden bg-black py-28"
-    >
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
-        {/* Grid */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D9AF58' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundSize: '60px 60px',
-          }}
-        />
-
-        {/* Light Orbs */}
-        <motion.div
-          className="absolute -left-48 top-1/3 h-96 w-96 rounded-full bg-[#D9AF58]/5 blur-[120px]"
-          animate={{
-            y: [0, 50, 0],
-            x: [0, 30, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-
-        <motion.div
-          className="absolute -right-48 bottom-1/3 h-96 w-96 rounded-full bg-[#D9AF58]/5 blur-[120px]"
-          animate={{
-            y: [0, -50, 0],
-            x: [0, -30, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="mb-20 flex flex-col justify-between gap-8 md:flex-row md:items-end"
-        >
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="h-px w-8 bg-[#D9AF58]" />
-
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#D9AF58]">
-                Insights
-              </span>
-            </div>
-
-            <h2 className="font-serif text-5xl font-bold leading-tight text-white md:text-6xl">
-              From Our
-              <br />
-              <span className="text-[#D9AF58]">Journal</span>
-            </h2>
-
-            <div className="h-px w-20 bg-[#D9AF58]" />
+    <>
+      <Header />
+      <main className="bg-black min-h-screen pt-20">
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20 overflow-hidden">
+          <div className="absolute inset-0">
+            <img
+              src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1920&h=600&fit=crop"
+              alt="Archaidplus Architects Blog"
+              width={1920}
+              height={600}
+              className="w-full h-full object-cover opacity-100"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/90" />
           </div>
+          <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center z-10">
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <span className="text-[#D9AF58] text-xs font-medium tracking-[0.3em] uppercase mb-4 block">What We Built Together</span>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">The ArchAid Plus Journal</h1>
+              <p className="text-white/80 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+                Thoughts on design, architecture, Vastu, and the art of creating extraordinary spaces.
+              </p>
+            </motion.div>
+          </div>
+        </section>
 
-          <Link
-            to="/blog"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 transition-all duration-300 hover:border-[#D9AF58]/50 hover:bg-[#D9AF58]/5"
-          >
-            <span className="font-mono text-sm tracking-wider text-white/80 transition-colors duration-300 group-hover:text-[#D9AF58]">
-              VIEW ALL ARTICLES
-            </span>
+        {/* Search Bar */}
+        <section className="max-w-7xl mx-auto px-6 lg:px-8 -mt-8 relative z-20">
+          <div className="max-w-md mx-auto">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-[#D9AF58]/50 focus:ring-1 focus:ring-[#D9AF58]/50"
+              />
+            </div>
+          </div>
+        </section>
 
-            <ArrowRight className="h-4 w-4 text-white/80 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#D9AF58]" />
-          </Link>
-        </motion.div>
-
-        {/* Blog Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 gap-8 md:grid-cols-3"
-        >
-          {posts.map((post) => (
-            <motion.article
-              key={post.title}
-              variants={itemVariants}
-              className="group relative"
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-500 hover:border-[#D9AF58]/30">
-                {/* Image */}
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                  {/* Category */}
-                  <div className="absolute left-4 top-4 z-10">
-                    <span className="rounded-full border border-[#D9AF58]/30 bg-black/60 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-wider text-[#D9AF58] backdrop-blur-md">
-                      {post.category}
-                    </span>
-                  </div>
-
-                  {/* Hover Icon */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-                    <div className="flex h-12 w-12 scale-0 items-center justify-center rounded-full bg-[#D9AF58] transition-transform duration-300 group-hover:scale-100">
-                      <ChevronRight className="h-5 w-5 text-black" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="space-y-4 p-6">
-                  <h3 className="line-clamp-2 font-serif text-xl font-bold leading-snug text-white transition-colors duration-300 group-hover:text-[#D9AF58]">
-                    {post.title}
-                  </h3>
-
-                  <p className="line-clamp-2 text-sm leading-relaxed text-white/50">
-                    {post.excerpt}
-                  </p>
-
-                  {/* Meta */}
-                  <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                    <div className="flex items-center gap-3 text-xs text-white/40">
-                      <div className="flex items-center gap-1">
-                        <User className="h-3 w-3" />
-                        <span>{post.author.split(' ')[0]}</span>
+        {/* Blog Posts Grid */}
+        <section ref={ref} className="py-16 max-w-7xl mx-auto px-6 lg:px-8">
+          {filteredPosts.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-white/60">No posts found. Try a different search term.</p>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredPosts.slice(0, visiblePosts).map((post, i) => (
+                  <motion.article
+                    key={post.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: Math.min(i * 0.1, 0.5) }}
+                    className="group rounded-2xl border border-white/10 bg-black overflow-hidden hover:border-[#D9AF58]/40 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
+                  >
+                    <Link to={`/blog/${post.id}`}>
+                      <div className="relative overflow-hidden aspect-video">
+                        <img 
+                          src={post.image} 
+                          alt={post.title} 
+                          width={800} 
+                          height={500} 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute top-4 left-4">
+                          <span className="px-3 py-1 rounded-full bg-[#D9AF58]/20 border border-[#D9AF58]/30 text-[#D9AF58] text-xs font-medium backdrop-blur-sm">
+                            {post.category}
+                          </span>
+                        </div>
                       </div>
-
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        <span>{post.readTime}</span>
+                      
+                      <div className="p-6">
+                        <div className="flex items-center gap-3 text-white/30 text-xs mb-3">
+                          <div className="flex items-center gap-1">
+                            <User className="w-3 h-3" />
+                            {post.author}
+                          </div>
+                          <span>•</span>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {post.readTime}
+                          </div>
+                        </div>
+                        <h2 className="font-serif text-lg font-semibold text-white mb-3 leading-snug group-hover:text-[#D9AF58] transition-colors duration-200 line-clamp-2">
+                          {post.title}
+                        </h2>
+                        <p className="text-white/50 text-sm leading-relaxed mb-5 line-clamp-3">
+                          {post.excerpt}
+                        </p>
+                        <div className="inline-flex items-center gap-1 text-[#D9AF58] text-xs font-medium group-hover:gap-2 transition-all duration-200">
+                          Read Article <ArrowRight className="w-3 h-3" />
+                        </div>
                       </div>
-                    </div>
-
-                    <Link
-                      to={`/blog/${post.title
-                        .toLowerCase()
-                        .replace(/\s+/g, '-')}`}
-                      className="translate-x-[-5px] font-mono text-xs tracking-wider text-[#D9AF58] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                    >
-                      Read More
                     </Link>
-                  </div>
-                </div>
-
-                {/* Bottom Line */}
-                <div className="absolute bottom-0 left-0 h-px w-0 bg-[#D9AF58] transition-all duration-700 group-hover:w-full" />
+                  </motion.article>
+                ))}
               </div>
-            </motion.article>
-          ))}
-        </motion.div>
 
-      
-      </div>
-    </section>
+              {visiblePosts < filteredPosts.length && (
+                <div className="text-center mt-12">
+                  <button
+                    onClick={loadMore}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#D9AF58]/40 text-[#D9AF58] hover:bg-[#D9AF58]/10 transition-all duration-300 text-sm font-medium"
+                  >
+                    Load More Articles
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* Instagram Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="mt-20 p-8 md:p-12 rounded-2xl border border-[#D9AF58]/20 bg-gradient-to-br from-black to-[#D9AF58]/5 text-center"
+          >
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Instagram className="w-8 h-8 text-[#D9AF58]" />
+              <h2 className="font-serif text-2xl md:text-3xl font-bold text-white">Follow Us on Instagram</h2>
+            </div>
+            <p className="text-white/60 max-w-2xl mx-auto mb-6">
+              Get daily inspiration, behind-the-scenes content, and updates on our latest projects.
+            </p>
+            <a
+              href="https://www.instagram.com/archaidplus/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#833AB4] via-[#E1306C] to-[#F77737] text-white px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              <Instagram className="w-4 h-4" />
+              @archaidplus
+            </a>
+          </motion.div>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
-};
-
-export default BlogSection;
+}

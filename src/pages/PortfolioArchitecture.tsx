@@ -29,14 +29,7 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop', 
     area: '120,000 sqft' 
   },
-  { 
-    title: 'Coastal Villa Retreat', 
-    location: 'Goa, India', 
-    year: '2022', 
-    type: 'Residential', 
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop', 
-    area: '6,800 sqft' 
-  },
+
   { 
     title: 'The Glass Pavilion', 
     location: 'Pune, India', 
@@ -96,7 +89,7 @@ export default function PortfolioArchitecture() {
         <section className="relative pt-40 pb-24 overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1920&h=600&fit=crop"
+              src="/images/exbanner.jpg"
               alt="Archaidplus Architects Portfolio"
               width={1920}
               height={600}
@@ -134,50 +127,46 @@ export default function PortfolioArchitecture() {
             ))}
           </div>
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Projects Grid - Simplified cards with only type and name */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filtered.map((project, i) => (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group relative rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[#D9AF58]/40 transition-all duration-300 bg-black"
+                className="group relative rounded-xl overflow-hidden cursor-pointer border border-white/10 hover:border-[#D9AF58]/40 transition-all duration-300 bg-black hover:-translate-y-1"
               >
                 {/* Image Container */}
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-[4/3] overflow-hidden bg-black/40">
                   <img 
                     src={project.image} 
                     alt={project.title} 
                     width={800} 
                     height={600} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    loading="lazy"
                   />
                 </div>
                 
-                {/* Content */}
-                <div className="p-5 bg-gradient-to-t from-black via-black to-transparent">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="px-2 py-0.5 rounded-full bg-[#D9AF58]/15 text-[#D9AF58] text-xs font-medium border border-[#D9AF58]/20">
+                {/* Simplified Content - Only Type and Title */}
+                <div className="p-4 bg-gradient-to-t from-black via-black/90 to-transparent">
+                  {/* Project Type Badge */}
+                  <div className="mb-2">
+                    <span className="inline-block px-2 py-0.5 rounded-full bg-[#D9AF58]/15 text-[#D9AF58] text-xs font-medium border border-[#D9AF58]/20">
                       {project.type}
                     </span>
-                    <span className="text-white/30 text-xs font-mono">{project.year}</span>
                   </div>
-                  <h3 className="font-serif text-lg font-semibold text-white mb-2 group-hover:text-[#D9AF58] transition-colors duration-300">
+                  
+                  {/* Project Title - Only name, no other write-ups */}
+                  <h3 className="font-serif text-base md:text-lg font-semibold text-white group-hover:text-[#D9AF58] transition-colors duration-300 line-clamp-1">
                     {project.title}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1 text-white/50 text-xs">
-                      <MapPin className="w-3 h-3 text-[#D9AF58]" />
-                      {project.location}
-                    </div>
-                    <span className="text-white/30 text-xs">{project.area}</span>
-                  </div>
                 </div>
                 
                 {/* Hover Overlay Arrow */}
-                <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#D9AF58]/20 backdrop-blur-sm border border-[#D9AF58]/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <ArrowRight className="w-4 h-4 text-[#D9AF58]" />
+                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-[#D9AF58]/20 backdrop-blur-sm border border-[#D9AF58]/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <ArrowRight className="w-3.5 h-3.5 text-[#D9AF58]" />
                 </div>
               </motion.div>
             ))}

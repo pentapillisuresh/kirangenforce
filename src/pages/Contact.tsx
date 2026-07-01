@@ -12,8 +12,8 @@ export default function Contact() {
         <section className="relative pt-40 pb-16 overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1920&h=600&fit=crop"
-              alt="Contact Archaidplus Architects"
+              src="/images/contactbanner.jpg"
+              alt="Contact CCIPL - CAD Consultants India Pvt Ltd"
               width={1920}
               height={600}
               className="w-full h-full object-cover opacity-100"
@@ -22,10 +22,10 @@ export default function Contact() {
           </div>
           <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <span className="text-[#D9AF58] text-xs font-medium tracking-[0.3em] uppercase mb-4 block">Reach Out</span>
-              <h1 className="font-serif text-5xl md:text-6xl font-bold text-white mb-6">Contact Us</h1>
+              <span className="text-[#D9AF58] text-xs font-medium tracking-[0.3em] uppercase mb-4 block">Get In Touch</span>
+              <h1 className="font-serif text-5xl md:text-6xl font-bold text-white mb-6">Let's Bring Your Vision to Life</h1>
               <p className="text-white/80 text-lg leading-relaxed max-w-2xl mx-auto">
-                Ready to start your project? We'd love to hear from you. Let's create something extraordinary together.
+                Ready to start your architecture, interior, structural, or construction project? Contact us today to discuss your project needs.
               </p>
             </motion.div>
           </div>

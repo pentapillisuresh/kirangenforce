@@ -4,28 +4,28 @@ import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    name: 'Alexandra Chen',
-    role: 'CEO, Luminary Group',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face',
-    quote: 'archaidplus transformed our headquarters into a space that perfectly embodies our brand. The attention to detail and the seamless process made this one of the best investments we\'ve ever made.',
+    name: 'Rajesh Reddy',
+    role: 'Managing Director, Srinivasa Constructions',
+    avatar: './images/test1.avif',
+    quote: 'KiranGenforce delivered exceptional power solutions for our commercial complex. Their Mahindra Powerol generators have been running flawlessly, and their service support is outstanding.',
     rating: 5,
-    project: 'Corporate HQ Redesign',
+    project: 'Commercial Complex, Hyderabad',
   },
   {
-    name: 'Marcus Williams',
-    role: 'Private Client',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
-    quote: 'Our penthouse renovation exceeded every expectation. The team\'s ability to blend modern luxury with warmth and livability is truly unmatched. We\'ve received countless compliments.',
+    name: 'Sneha Patel',
+    role: 'Plant Manager, GreenTech Industries',
+    avatar: './images/test2.avif',
+    quote: 'We switched to Mahindra Powerol generators through KiranGenforce and the difference is remarkable. Fuel efficiency and low noise levels have significantly improved our operations.',
     rating: 5,
-    project: 'Penthouse Renovation',
+    project: 'Industrial Plant, Visakhapatnam',
   },
   {
-    name: 'Sophia Laurent',
-    role: 'Hotel Director, The Maison',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
-    quote: 'Working with archaidplus on our boutique hotel was an extraordinary experience. They understood our vision immediately and delivered a space that our guests consistently describe as magical.',
+    name: 'Priya Sharma',
+    role: 'Operations Head, TechPark Solutions',
+    avatar: './images/test3.jpg',
+    quote: 'The team at KiranGenforce provided excellent support for our generator installation. From selection to maintenance, their expertise and service quality exceeded our expectations.',
     rating: 5,
-    project: 'Boutique Hotel Design',
+    project: 'Corporate Office, Hyderabad',
   },
 ];
 
@@ -38,18 +38,18 @@ const TestimonialsSection = () => {
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
 
   return (
-    <section ref={ref} className="relative py-28 bg-black overflow-hidden">
+    <section ref={ref} className="relative py-28 bg-black overflow-hidden mt-20">
       {/* Premium Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D9AF58' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23EB0133' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: '60px 60px'
         }} />
         
         {/* Animated Light Orbs */}
         <motion.div
-          className="absolute top-1/4 -left-48 w-96 h-96 rounded-full bg-[#D9AF58]/5 blur-[120px]"
+          className="absolute top-1/4 -left-48 w-96 h-96 rounded-full bg-[#EB0133]/5 blur-[120px]"
           animate={{
             y: [0, 50, 0],
             x: [0, 30, 0]
@@ -61,7 +61,7 @@ const TestimonialsSection = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-1/4 -right-48 w-96 h-96 rounded-full bg-[#D9AF58]/5 blur-[120px]"
+          className="absolute bottom-1/4 -right-48 w-96 h-96 rounded-full bg-[#EB0133]/5 blur-[120px]"
           animate={{
             y: [0, -50, 0],
             x: [0, -30, 0]
@@ -75,31 +75,23 @@ const TestimonialsSection = () => {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8">
-        {/* Header Section */}
+        {/* Header Section - Same style as Services/About/Process */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl mx-auto mb-20"
         >
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-8 h-px bg-[#D9AF58]" />
-            <span className="text-[#D9AF58] text-xs font-mono tracking-[0.2em] uppercase">
-              Testimonials
-            </span>
-            <div className="w-8 h-px bg-[#D9AF58]" />
-          </div>
+          <span className="text-[#EB0133] uppercase tracking-[0.35em] text-xs font-mono font-semibold block mb-5">
+            Client Stories
+          </span>
           
-          <h2 className="font-serif text-5xl md:text-6xl lg:text-5xl font-bold text-white leading-tight mb-6">
-            What Our
-            <br />
-            <span className="text-[#D9AF58]">Clients Say</span>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+            What Our <span className="text-[#EB0133]">Clients Say</span>
           </h2>
           
-          <div className="w-20 h-px bg-[#D9AF58] mx-auto mb-6" />
-          
-          <p className="text-white/50 max-w-2xl mx-auto font-sans">
-            Trusted by leading brands and discerning clients worldwide
+          <p className="text-white/50 text-base leading-relaxed font-sans">
+            Trusted by businesses across India for reliable power solutions
           </p>
         </motion.div>
 
@@ -112,11 +104,11 @@ const TestimonialsSection = () => {
         >
           <div className="relative p-10 md:p-14 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-sm overflow-hidden shadow-2xl">
             {/* Premium Decorative Elements */}
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#D9AF58]/50 to-transparent" />
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-[#EB0133]/20" />
             
             {/* Quote Icon Background */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[#D9AF58]/5 blur-2xl" />
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-[#D9AF58]/5 blur-2xl" />
+            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[#EB0133]/5 blur-2xl" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-[#EB0133]/5 blur-2xl" />
             
             {/* Large Quote Mark */}
             <div className="absolute top-8 left-8 opacity-[0.03]">
@@ -139,7 +131,7 @@ const TestimonialsSection = () => {
                   transition={{ delay: 0.2 }}
                 >
                   {Array.from({ length: testimonials[current].rating }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-[#D9AF58] fill-[#D9AF58]" />
+                    <Star key={i} className="w-5 h-5 text-[#EB0133] fill-[#EB0133]" />
                   ))}
                 </motion.div>
 
@@ -162,13 +154,13 @@ const TestimonialsSection = () => {
                 >
                   {/* Avatar with Premium Border */}
                   <div className="relative">
-                    <div className="absolute inset-0 rounded-full bg-[#D9AF58] blur-md opacity-30" />
+                    <div className="absolute inset-0 rounded-full bg-[#EB0133] blur-md opacity-30" />
                     <img
                       src={testimonials[current].avatar}
                       alt={testimonials[current].name}
                       width={64}
                       height={64}
-                      className="relative w-16 h-16 rounded-full object-cover border-2 border-[#D9AF58]"
+                      className="relative w-16 h-16 rounded-full object-cover border-2 border-[#EB0133]"
                     />
                   </div>
                   
@@ -179,7 +171,7 @@ const TestimonialsSection = () => {
                     <div className="text-white/50 text-sm font-sans mt-0.5">
                       {testimonials[current].role}
                     </div>
-                    <div className="text-[#D9AF58] text-xs font-mono tracking-wider mt-1">
+                    <div className="text-[#EB0133] text-xs font-mono tracking-wider mt-1">
                       {testimonials[current].project}
                     </div>
                   </div>
@@ -194,7 +186,7 @@ const TestimonialsSection = () => {
             <button
               onClick={prev}
               aria-label="Previous testimonial"
-              className="group w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-[#D9AF58] hover:border-[#D9AF58] hover:text-black transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D9AF58]/50"
+              className="group w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-[#EB0133] hover:border-[#EB0133] hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#EB0133]/50"
             >
               <ChevronLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
             </button>
@@ -206,9 +198,9 @@ const TestimonialsSection = () => {
                   key={i}
                   onClick={() => setCurrent(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D9AF58]/50 ${
+                  className={`rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#EB0133]/50 ${
                     i === current 
-                      ? 'w-8 h-2 bg-[#D9AF58]' 
+                      ? 'w-8 h-2 bg-[#EB0133]' 
                       : 'w-2 h-2 bg-white/30 hover:bg-white/50'
                   }`}
                 />
@@ -219,14 +211,12 @@ const TestimonialsSection = () => {
             <button
               onClick={next}
               aria-label="Next testimonial"
-              className="group w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-[#D9AF58] hover:border-[#D9AF58] hover:text-black transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D9AF58]/50"
+              className="group w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-[#EB0133] hover:border-[#EB0133] hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#EB0133]/50"
             >
               <ChevronRight className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
             </button>
           </div>
         </motion.div>
-
-      
       </div>
     </section>
   );

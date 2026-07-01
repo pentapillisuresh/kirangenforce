@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Search, PenTool, Layers, Hammer, CheckCircle } from 'lucide-react';
+import { Search, PenTool, Layers, Hammer, CheckCircle, Zap, Settings, Shield, Users, Award } from 'lucide-react';
 
 const steps = [
-  { icon: Search, step: '01', title: 'Discovery', desc: 'In-depth consultation to understand your vision.' },
-  { icon: PenTool, step: '02', title: 'Concept', desc: 'Initial concepts and mood boards for layouts.' },
-  { icon: Layers, step: '03', title: 'Development', desc: 'Refined drawings and 3D visualizations.' },
-  { icon: Hammer, step: '04', title: 'Build', desc: 'Precision craftsmanship by our expert team.' },
-  { icon: CheckCircle, step: '05', title: 'Handover', desc: 'Final walkthrough and styling of the space.' },
+  { icon: Search, step: '01', title: 'Consultation', desc: 'Understanding your power requirements and application needs.' },
+  { icon: PenTool, step: '02', title: 'Solution Design', desc: 'Designing the optimal power solution for your specific needs.' },
+  { icon: Layers, step: '03', title: 'Product Selection', desc: 'Selecting the right generator from 5KVA to 650KVA range.' },
+  { icon: Hammer, step: '04', title: 'Installation', desc: 'Professional installation by our expert technical team.' },
+  { icon: CheckCircle, step: '05', title: 'Service Support', desc: 'Comprehensive after-sales service and maintenance support.' },
 ];
 
 const useTypewriter = (text: string, speed: number = 20, delay: number = 0) => {
@@ -52,32 +52,26 @@ const AlternatingTimeline = () => {
   }, [isInView]);
 
   return (
-    <section ref={containerRef} className="py-40 bg-black overflow-hidden">
+    <section ref={containerRef} className="py-40 bg-black overflow-hidden mt-20">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Title and Subtitle Section */}
+        {/* Title and Subtitle Section - Same style as Services/About */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-20"
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl mx-auto mb-20"
         >
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-8 h-px bg-[#D9AF58]" />
-            <span className="text-[#D9AF58] text-xs font-mono tracking-[0.2em] uppercase">
-              Our Process
-            </span>
-            <div className="w-8 h-px bg-[#D9AF58]" />
-          </div>
+          <span className="text-[#EB0133] uppercase tracking-[0.35em] text-xs font-mono font-semibold block mb-5">
+            Our Process
+          </span>
           
-          <h2 className="font-serif text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
-            How We Work
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+            How We Deliver <span className="text-[#EB0133]">Power</span>
           </h2>
           
-          <div className="w-20 h-px bg-[#D9AF58] mx-auto mb-6" />
-          
-          <p className="text-white/50 max-w-xl mx-auto font-sans">
-            A seamless journey from concept to completion, ensuring excellence at every step.
+          <p className="text-white/50 text-base leading-relaxed font-sans">
+            A seamless journey from consultation to service support, ensuring reliable power solutions at every step.
           </p>
         </motion.div>
         
@@ -86,7 +80,7 @@ const AlternatingTimeline = () => {
           {/* Central Horizontal Line */}
           <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -translate-y-1/2 hidden md:block">
             <motion.div 
-              className="absolute top-0 left-0 h-full bg-[#D9AF58] origin-left"
+              className="absolute top-0 left-0 h-full bg-[#EB0133] origin-left"
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 3, ease: "linear" }}
@@ -113,14 +107,14 @@ const AlternatingTimeline = () => {
                     }`}
                   >
                     <div className="flex flex-col items-center gap-2">
-                      <div className="p-2 rounded-full bg-[#D9AF58]/10 mb-2">
-                        <item.icon className="w-5 h-5 text-[#D9AF58]" />
+                      <div className="p-2 rounded-full bg-[#EB0133]/10 mb-2">
+                        <item.icon className="w-5 h-5 text-[#EB0133]" />
                       </div>
                       <h3 className="text-white font-serif text-lg font-bold">{item.title}</h3>
                       <p className="text-white/40 text-xs leading-relaxed max-w-[160px]">
                         {isActive ? typewriterDesc : ""}
                         {isActive && typewriterDesc.length < item.desc.length && (
-                          <span className="inline-block w-1 h-3 ml-1 bg-[#D9AF58] animate-pulse" />
+                          <span className="inline-block w-1 h-3 ml-1 bg-[#EB0133] animate-pulse" />
                         )}
                       </p>
                     </div>
@@ -131,11 +125,11 @@ const AlternatingTimeline = () => {
                     <motion.div 
                       initial={{ scale: 0 }}
                       animate={isActive ? { scale: 1 } : {}}
-                      className="w-4 h-4 rounded-full bg-black border-2 border-[#D9AF58] z-20"
+                      className="w-4 h-4 rounded-full bg-black border-2 border-[#EB0133] z-20"
                     >
                       {isActive && (
                         <motion.div 
-                          className="absolute inset-0 rounded-full bg-[#D9AF58]"
+                          className="absolute inset-0 rounded-full bg-[#EB0133]"
                           animate={{ scale: [1, 2.5], opacity: [0.3, 0] }}
                           transition={{ duration: 1.5, repeat: Infinity }}
                         />
@@ -153,7 +147,7 @@ const AlternatingTimeline = () => {
                   <motion.span 
                     initial={{ opacity: 0 }}
                     animate={isActive ? { opacity: 1 } : {}}
-                    className={`absolute font-mono text-[10px] text-[#D9AF58] tracking-widest hidden md:block ${
+                    className={`absolute font-mono text-[10px] text-[#EB0133] tracking-widest hidden md:block ${
                       isAbove ? 'top-[calc(50%+15px)]' : 'bottom-[calc(50%+15px)]'
                     }`}
                   >

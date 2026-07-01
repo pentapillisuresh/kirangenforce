@@ -3,43 +3,43 @@ import { motion, useInView } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-import { Building2, Sofa, Hammer, Compass, ArrowRight, CheckCircle } from 'lucide-react';
+import { Building2, Sofa, HardHat, Hammer, ArrowRight, CheckCircle } from 'lucide-react';
 
 const services = [
   {
     icon: Building2,
     number: '01',
     title: 'Architecture',
-    subtitle: 'Visionary Structures',
-    desc: 'From concept to completion, we craft buildings that stand as testaments to human ingenuity and aesthetic vision. Our architectural services encompass residential, commercial, and mixed-use developments.',
-    features: ['Concept Development', 'Schematic Design', 'Construction Documents', 'Project Management', 'Site Supervision'],
+    subtitle: 'Innovative Designs & Vasthu Compliance',
+    desc: 'We combine creativity with functionality to craft architectural designs that inspire and endure. Our comprehensive architectural services include house plans, floor plans, 2D & 3D elevation designs, and 3D walkthrough videos.',
+    features: ['House Plans & Floor Plans', '2D & 3D Elevation Designs', '3D Walkthrough Videos', 'Land & Site Surveying', 'Vasthu Compliance'],
     image: './images/arc.avif',
   },
   {
     icon: Sofa,
     number: '02',
-    title: 'Interiors',
-    subtitle: 'Spatial Poetry',
-    desc: 'Transforming interiors into living works of art. Every material, texture, and light source is considered with intention to create spaces that are both beautiful and deeply functional.',
-    features: ['Space Planning', 'Material Selection', 'Furniture Curation', 'Lighting Design', 'Art & Accessories'],
+    title: 'Interior Designs',
+    subtitle: 'Tailored Elegance & Functionality',
+    desc: 'Transform your spaces into a blend of functionality and elegance with our bespoke interior design services. We cater to residential, office, and commercial needs with designs that reflect your personality and purpose.',
+    features: ['Custom Designs', 'AR/VR Technology Visualization', 'Premium Materials & Finishes', 'Residential Interiors', 'Office & Commercial Interiors'],
     image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&h=400&fit=crop',
   },
   {
-    icon: Hammer,
+    icon: HardHat,
     number: '03',
-    title: 'Renovation',
-    subtitle: 'Adaptive Reuse',
-    desc: 'Breathing new life into existing structures while preserving their character. We specialize in sensitive renovations that honor architectural heritage while meeting contemporary needs.',
-    features: ['Structural Assessment', 'Heritage Preservation', 'Modern Integration', 'Material Matching', 'Phased Delivery'],
+    title: 'Structural Solutions',
+    subtitle: 'Precision Engineering & Safety',
+    desc: 'Our structural design services prioritize precision, safety, and durability to ensure your projects stand the test of time. We deliver solutions that blend innovation with engineering excellence.',
+    features: ['Structural Analysis & Design', 'Innovative Materials & Methods', 'Regulatory Compliance', 'Residential & Commercial', 'Industrial Buildings'],
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop',
   },
   {
-    icon: Compass,
+    icon: Hammer,
     number: '04',
-    title: 'Consulting',
-    subtitle: 'Expert Guidance',
-    desc: 'Expert guidance at every stage of your project. Whether you need a second opinion or comprehensive strategic advice, our consultants bring decades of experience to your vision.',
-    features: ['Brief Development', 'Contractor Selection', 'Budget Advisory', 'Quality Review', 'Post-Occupancy'],
+    title: 'Construction Services',
+    subtitle: 'End-to-End Construction Solutions',
+    desc: 'We offer end-to-end construction solutions, ensuring every project is executed with precision, quality, and on-time delivery. From foundations to finishes, we bring your visions to life.',
+    features: ['Civil Construction', 'MEP Services', 'Waterproofing Services', 'Permits & Approvals', 'Quality & On-time Delivery'],
     image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop',
   },
 ];
@@ -51,25 +51,25 @@ export default function Services() {
   return (
     <>
       <Header />
-      <main className="bg-black min-h-screen">
-        {/* Hero Section with banner image */}
-        <section className="relative pt-40 pb-24 overflow-hidden">
+      <main className="bg-black min-h-screen pt-20">
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-32 overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1920&h=600&fit=crop"
-              alt="Archaidplus Architects Services"
+              src="./images/servicebanner.jpg"
+              alt="CCIPL Architecture and Construction Services"
               width={1920}
-              height={600}
-              className="w-full h-full object-cover opacity-100"
+              height={800}
+              className="w-full h-full object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/90" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/90" />
           </div>
-          <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center z-10">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
               <span className="text-[#D9AF58] text-xs font-medium tracking-[0.3em] uppercase mb-4 block">What We Offer</span>
               <h1 className="font-serif text-5xl md:text-6xl font-bold text-white mb-6">Our Services</h1>
               <p className="text-white/80 text-lg leading-relaxed max-w-2xl mx-auto">
-                Comprehensive design solutions tailored to your vision, budget, and timeline.
+                Comprehensive design and construction solutions tailored to your vision, budget, and timeline.
               </p>
             </motion.div>
           </div>
@@ -153,14 +153,14 @@ export default function Services() {
               Ready to Start Your Project?
             </h2>
             <p className="text-white/60 max-w-2xl mx-auto mb-8">
-              Let's discuss your vision and turn it into reality. Our team of experts is ready to guide you through every step.
+              Let's discuss your vision and turn it into reality. Our team of experts is ready to guide you through every step of architecture, interiors, structural, and construction.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/portfolio"
+                to="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-[#D9AF58] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#D9AF58]/90 transition-all duration-200"
               >
-                View Our Portfolio
+                Get In Touch Today
               </Link>
               <Link
                 to="/contact"

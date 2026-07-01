@@ -1,257 +1,126 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
 
-const projects = [
+const spaces = [
   {
-    title: "Modern Living Room",
-    category: "Residential",
-    type: "Single Home",
-    image:
-      "/images/project1.png",
-    progress: "42%",
+    id: 1,
+    image: "/images/product7.webp",
+    title: "Power Generation",
   },
   {
-    title: "Minimal Staircase",
-    category: "Residential",
-    type: "Single Home",
-    image:
-      "./images/project2.png",
-    progress: "28%",
+    id: 2,
+    image: "/images/product8.webp",
+    title: "Industrial Solutions",
   },
   {
-    title: "Luxury Interior",
-    category: "Residential",
-    type: "Single Home",
-    image:
-      "./images/project3.png",
-    progress: "35%",
+    id: 3,
+    image: "/images/product9.webp",
+    title: "Generator Sets",
+  },
+  {
+    id: 4,
+    image: "/images/product10.webp",
+    title: "Electrical Panels",
+  },
+  {
+    id: 5,
+    image: "/images/product1.webp",
+    title: "Exhaust Systems",
+  },
+  {
+    id: 6,
+    image: "/images/product2.webp",
+    title: "Service Support",
+  },
+  {
+    id: 7,
+    image: "/images/product3.webp",
+    title: "Power Solutions",
   },
 ];
 
-const FeaturedProjects = () => {
-  const ref = useRef(null);
-
-  const inView = useInView(ref, {
-    once: true,
-    margin: "-100px",
-  });
+export default function ExploreSpaces() {
+  const [activeCard, setActiveCard] = useState(1);
 
   return (
-    <section
-      ref={ref}
-      className="relative py-20 bg-black overflow-hidden"
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.02] bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="bg-black py-24">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <span className="text-[#D9AF58] uppercase tracking-[0.35em] text-xs font-mono font-semibold block mb-5">
-            Portfolio
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-[#EB0133] uppercase tracking-[0.35em] text-xs font-mono font-semibold block mb-5">
+            Our Gallery
           </span>
 
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
-            Bringing Interior
+            Power Solutions
             <br />
-            <span className="text-[#D9AF58]">Designs To Life</span>
+            <span className="text-[#EB0133]">
+              In Action
+            </span>
           </h2>
 
           <p className="text-white/50 text-base leading-relaxed font-sans">
-            Our portfolio showcases a diverse range of projects,
-            from beautifully crafted residential spaces to
-            functional and stylish commercial interiors.
+            Explore our gallery showcasing Mahindra Powerol generator sets, 
+            electrical panels, and power solutions across various industries and applications.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Masonry Layout - Equal Heights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-          {/* First Card - Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.8,
-              delay: 0,
-            }}
-            className="group relative overflow-hidden rounded-2xl cursor-pointer md:mt-0"
-          >
-            {/* Image Container - Equal Height */}
-            <div className="relative overflow-hidden h-[480px]">
+        {/* Gallery */}
+        <div className="flex justify-center gap-3 h-[420px]">
+          {spaces.map((space) => (
+            <div
+              key={space.id}
+              onMouseEnter={() => setActiveCard(space.id)}
+              className={`
+                relative overflow-hidden rounded-[20px]
+                cursor-pointer
+                transition-all duration-700 ease-in-out
+                ${
+                  activeCard === space.id
+                    ? "w-[420px]"
+                    : "w-[70px]"
+                }
+              `}
+            >
               <img
-                src={projects[0].image}
-                alt={projects[0].title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
+                src={space.image}
+                alt={space.title}
+                className="absolute inset-0 w-full h-full object-cover"
               />
 
-              {/* Overlay */}
+              {/* Overlay with gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-[#D9AF58]/0 group-hover:bg-[#D9AF58]/10 transition-all duration-500" />
-            </div>
-
-            {/* Top Tags */}
-            <div className="absolute top-4 left-4 flex gap-2">
-              <span className="px-3 py-1.5 rounded-full border border-white/40 bg-black/50 backdrop-blur-md text-white text-[10px] font-mono font-semibold uppercase tracking-wider">
-                {projects[0].category}
-              </span>
-
-              <span className="px-3 py-1.5 rounded-full border border-white/40 bg-black/50 backdrop-blur-md text-white text-[10px] font-mono font-semibold uppercase tracking-wider">
-                {projects[0].type}
-              </span>
-            </div>
-
-            {/* Bottom Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div className="flex items-end justify-between">
-                <div>
-                  <h3 className="font-serif text-2xl font-bold text-white mb-1">
-                    {projects[0].title}
-                  </h3>
-
-                  <p className="text-white/60 text-xs font-sans">
-                    Premium Interior Design
+              {/* Title */}
+              <div
+                className={`
+                  absolute bottom-5 left-5
+                  transition-all duration-500
+                  ${
+                    activeCard === space.id
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-10"
+                  }
+                `}
+              >
+                <h3 className="text-white text-2xl font-semibold font-serif">
+                  {space.title}
+                </h3>
+                {activeCard === space.id && (
+                  <p className="text-[#EB0133] text-sm mt-1 font-mono tracking-wider">
+                    {space.id === 1 && "5KVA - 650KVA"}
+                    {space.id === 2 && "Industrial Applications"}
+                    {space.id === 3 && "Mahindra Powerol"}
+                    {space.id === 4 && "HT & LT Panels"}
+                    {space.id === 5 && "Emission Control"}
+                    {space.id === 6 && "200+ Service Points"}
+                    {space.id === 7 && "Global Reach"}
                   </p>
-                </div>
-
-               
+                )}
               </div>
             </div>
-
-            {/* Hover Button */}
-            <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-xl border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 hover:bg-[#D9AF58] hover:border-[#D9AF58] group-hover:scale-110">
-              <ArrowUpRight className="w-4 h-4 text-white group-hover:text-black transition-colors duration-300" />
-            </div>
-          </motion.div>
-
-          {/* Second Card - Middle (More Down) */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.8,
-              delay: 0.15,
-            }}
-            className="group relative overflow-hidden rounded-2xl cursor-pointer md:mt-16"
-          >
-            {/* Image Container - Equal Height */}
-            <div className="relative overflow-hidden h-[480px]">
-              <img
-                src={projects[1].image}
-                alt={projects[1].title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-[#D9AF58]/0 group-hover:bg-[#D9AF58]/10 transition-all duration-500" />
-            </div>
-
-            {/* Top Tags */}
-            <div className="absolute top-4 left-4 flex gap-2">
-              <span className="px-3 py-1.5 rounded-full border border-white/40 bg-black/50 backdrop-blur-md text-white text-[10px] font-mono font-semibold uppercase tracking-wider">
-                {projects[1].category}
-              </span>
-
-              <span className="px-3 py-1.5 rounded-full border border-white/40 bg-black/50 backdrop-blur-md text-white text-[10px] font-mono font-semibold uppercase tracking-wider">
-                {projects[1].type}
-              </span>
-            </div>
-
-            {/* Bottom Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div className="flex items-end justify-between">
-                <div>
-                  <h3 className="font-serif text-2xl font-bold text-white mb-1">
-                    {projects[1].title}
-                  </h3>
-
-                  <p className="text-white/60 text-xs font-sans">
-                    Premium Interior Design
-                  </p>
-                </div>
-
-               
-              </div>
-            </div>
-
-            {/* Hover Button */}
-            <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-xl border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 hover:bg-[#D9AF58] hover:border-[#D9AF58] group-hover:scale-110">
-              <ArrowUpRight className="w-4 h-4 text-white group-hover:text-black transition-colors duration-300" />
-            </div>
-          </motion.div>
-
-          {/* Third Card - Right (Same as First) */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.8,
-              delay: 0.3,
-            }}
-            className="group relative overflow-hidden rounded-2xl cursor-pointer md:mt-0"
-          >
-            {/* Image Container - Equal Height */}
-            <div className="relative overflow-hidden h-[480px]">
-              <img
-                src={projects[2].image}
-                alt={projects[2].title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2000ms]"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-[#D9AF58]/0 group-hover:bg-[#D9AF58]/10 transition-all duration-500" />
-            </div>
-
-            {/* Top Tags */}
-            <div className="absolute top-4 left-4 flex gap-2">
-              <span className="px-3 py-1.5 rounded-full border border-white/40 bg-black/50 backdrop-blur-md text-white text-[10px] font-mono font-semibold uppercase tracking-wider">
-                {projects[2].category}
-              </span>
-
-              <span className="px-3 py-1.5 rounded-full border border-white/40 bg-black/50 backdrop-blur-md text-white text-[10px] font-mono font-semibold uppercase tracking-wider">
-                {projects[2].type}
-              </span>
-            </div>
-
-            {/* Bottom Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div className="flex items-end justify-between">
-                <div>
-                  <h3 className="font-serif text-2xl font-bold text-white mb-1">
-                    {projects[2].title}
-                  </h3>
-
-                  <p className="text-white/60 text-xs font-sans">
-                    Premium Interior Design
-                  </p>
-                </div>
-
-               
-              </div>
-            </div>
-
-            {/* Hover Button */}
-            <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-xl border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 hover:bg-[#D9AF58] hover:border-[#D9AF58] group-hover:scale-110">
-              <ArrowUpRight className="w-4 h-4 text-white group-hover:text-black transition-colors duration-300" />
-            </div>
-          </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default FeaturedProjects;
+}
