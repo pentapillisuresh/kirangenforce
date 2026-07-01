@@ -11,7 +11,7 @@ import BlogPost from './src/pages/BlogPost';
 import Contact from './src/pages/Contact';
 import PortfolioArchitecture from './src/pages/PortfolioArchitecture';
 import PortfolioInteriorDesign from './src/pages/PortfolioInteriorDesign';
-import TrendingPage from './src/pages/TrendingPage';
+// import TrendingPage from './src/pages/TrendingPage';
 import Gallery from './src/pages/Gallery';
 import NotFound from './src/pages/NotFound';
 
@@ -55,7 +55,7 @@ export default function App() {
               path="/portfolio/interior-design"
               element={<PortfolioInteriorDesign />}
             />
-            <Route path="/trending-ideas" element={<TrendingPage />} />
+            {/* <Route path="/trending-ideas" element={<TrendingPage />} /> */}
             <Route path="/gallery" element={<Gallery />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
